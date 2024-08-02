@@ -5,9 +5,9 @@ const router = express.Router();
 const usersController = require('../controllers/usersController')
 // authentication 
 // /api/users/login
-
+router.post('/users/login',usersController.userLogin)
 // /api/users
 
-router.get('/users',usersController.registerUser)
+router.post('/users',usersController.registerUser)
 
 module.exports = router;

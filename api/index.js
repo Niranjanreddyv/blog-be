@@ -7,6 +7,7 @@ const connectDB = require('../config/dbConnect')
 const mongoose = require('mongoose')
 connectDB();
 // user routes => /api/users and api/user
+app.use(express.json()); // middleware
 app.use('/api', require('../routes/userRoutes') )
 
 mongoose.connection.once('open',()=>{
