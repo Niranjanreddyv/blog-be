@@ -28,7 +28,7 @@ const userLogin = async (req,res) =>{
 const registerUser = async (req,res) =>{
     // logic to register the user 
 
-    const user = req.body;
+    const {user} = req.body;
 
     if(!user || !user.email || !user.password || !user.username){
         return res.status(400).json({message:"All fields are require"})
