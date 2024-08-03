@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 // each of field ensure the the monodb documents adher to this
+
 const userSchema = new mongoose.Schema({
     username:{
         type:String,
@@ -46,4 +47,19 @@ userSchema.methods.toUserResponse = function(){
         token: this.generateAccessToken()
    }
 }
+
+
+userSchema.methods.toProfileJSON = function(user){
+
+    return {
+         username:this.username,
+         bio:this.bio,
+         image: this.image,
+         following:10
+    };
+ };
+
+
+
+
 module.exports = mongoose.model('User',userSchema)

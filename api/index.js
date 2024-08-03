@@ -13,7 +13,13 @@ connectDB();
 // user routes => /api/users and api/user
 app.use(cors(corsOptions))
 app.use(express.json()); // middleware
-app.use('/api', require('../routes/userRoutes') )
+
+// user routes for /api/users and /api/user
+app.use('/api', require('../routes/userRoutes'));
+
+// article routes
+app.use('/api/articles', require('../routes/articleRoutes'));
+
 
 mongoose.connection.once('open',()=>{
     console.log('connected to MongoDB');

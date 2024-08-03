@@ -15,7 +15,7 @@ router.post('/users',usersController.registerUser)
 router.get('/user', verifyJWT ,usersController.getCurrentUser)
 
 // update the user
-// router.put('/user',usersController.getCurrentUser)
+router.put('/user', verifyJWT,usersController.updateUser)
 
 
 module.exports = router;
