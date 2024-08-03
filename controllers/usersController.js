@@ -1,6 +1,19 @@
 const User = require('../models/User')
 const bcrypt = require('bcrypt');
 
+const getCurrentUser = async (req,res) => {
+    // after log email,password and that we need to store to in the request
+
+    const email = req.userEmail;
+
+    // console.log('email',{email});
+    const user = await User.findOne({email}).exec();
+
+    if(!user){
+        return res.status(404).json({message:"User Not Found"});
+    }
+    return res.status(200).json({user: user.toUserResponse()})
+}
 
 const userLogin = async (req,res) =>{
     const user = req.body;
@@ -34,7 +47,7 @@ const registerUser = async (req,res) =>{
         return res.status(400).json({message:"All fields are require"})
     }
     // hash password => hashing + salting(unique string)
-    console.log("user",{user});
+    // console.log("user",{user});
 
     const hashedPass = await bcrypt.hash(user.password,10); // 10 => salt rounds
 
@@ -64,5 +77,6 @@ const registerUser = async (req,res) =>{
 
 module.exports = {
     registerUser,
-    userLogin
+    userLogin,
+    getCurrentUser
 }
