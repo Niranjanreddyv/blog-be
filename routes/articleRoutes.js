@@ -1,5 +1,5 @@
 
-const express = require('express');
+const express = require('express')
 
 const router = express.Router();
 const articlesController = require('../controllers/articlesController');
@@ -9,6 +9,8 @@ const verifyJWT = require('../middleware/verifyJWT');
 router.post('/',verifyJWT ,articlesController.createArticle);
 
 // /api/articles
-router.get('/feed',verifyJWT ,articlesController.feedArticles);
+router.get('/feed',verifyJWT,  articlesController.feedArticles);
+
+router.get('/:slug',verifyJWT,  articlesController.getArticleWithSlug);
 
 module.exports = router;

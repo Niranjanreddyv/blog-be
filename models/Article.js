@@ -36,7 +36,7 @@ const articleSchema = new mongoose.Schema({
         default:0
     },
     comments: [
-            {
+        {
             type:mongoose.Schema.Types.ObjectId,
             ref: 'Comment',
         },
@@ -56,7 +56,7 @@ articleSchema.plugin(uniqueValidator);
 
 articleSchema.pre('save',function(next){
 
-    this.slug = slugify(this.title,{lower:true,replacement:'-'});
+    this.slug = slugify(this.title,{lower:true, replacement:'-'});
 
 
     next();

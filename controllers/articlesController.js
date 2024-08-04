@@ -30,14 +30,39 @@ const createArticle = async (req,res) => {
     return res.status(200).json({article: await article.toArticleResponse(author)})
 }
 
-// const feedArticles= async (req,res) => {
-//     // after log email,password and that we need to store to in the request
+const feedArticles = async(req,res) => {
+    //in the req\\
+    Article.find({})
+    .then(articles => {
+        res.json(articles);  // Send JSON response with the articles
+    })
+    .catch(err => {
+        console.error('Error fetching articles', err);
+        res.status(500).json({ error: 'Error fetching articles' });
+    });
+  
+}
 
-// }
+const getArticleWithSlug = async (req,res) => {
+    const {slug} = req.params;
 
+    const article = await Article.findOne({slug}).exec();
+
+    if(!article){
+        return res.status(401).json({
+            message:'Article Not Found'
+        })
+    }
+
+    return res.status(200).json({
+        article:await article.toArticleResponse(false)
+    })
+}
 
 
 module.exports = {
     createArticle,
+    feedArticles,
+    getArticleWithSlug
    
 };
